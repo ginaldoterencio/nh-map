@@ -51,11 +51,12 @@ define(['async!http://maps.google.com/maps/api/js?v=3&sensor=false'], function()
         origin: legs[0].start_address,
         destination: legs[legs.length - 1].end_address,
       });
+      
+      if(legs[0].travelMode === travelModes[travelModes.length - 1]) {
+        callback.call(this, routes);
+      }
     }
 
-    if(result.mc.travelMode === travelModes[travelModes.length - 1]) {
-      callback.call(this, routes);
-    }
   }
 
   function getSumDurationLegs(route) {
